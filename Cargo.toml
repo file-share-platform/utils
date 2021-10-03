@@ -1,0 +1,21 @@
+[package]
+name = "utils"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sha2 = { version = "0.9.8", optional = true }
+rand = { version = "0.8.4", optional = true}
+mobc= { version = "0.7.3", optional = true }
+mobc-postgres = { version = "*", features = ["with-chrono-0_4"], optional = true }
+derive = { path="./derive", optional = true }
+
+[features]
+default = ["hash", "database", "hex", "derive-macros", "macros"]
+database = ["mobc", "mobc-postgres", "derive"]
+derive-macros = ["derive"]
+hash = ["sha2"]
+hex = ["rand"]
+macros = ["derive"]
